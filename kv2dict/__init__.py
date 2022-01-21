@@ -1,12 +1,15 @@
 import io
 
-def unescapeKeyValues(keyValuesString):
-    return keyValuesString.replace('\\n', '\n').replace('\\t', '\t').replace('\\\\', '\\').replace('\\"', '"')
 
-def kvStr2Dict(keyvaluesString):
+def unescapeKeyValues(keyValuesString):
+    return keyValuesString.replace(r'\n', '\n').replace(r'\t', '\t').replace(r'\\', '\\').replace(r'\"', '"')
+
+
+def loads(keyvaluesString):
     if not isinstance(keyvaluesString, str):
         raise ValueError('argument must be str')
-    
+
+
     kvDict = {}
     focus = [ kvDict ]
     
@@ -47,7 +50,7 @@ def kvStr2Dict(keyvaluesString):
     
     return kvDict
 
-def kvFile2Dict(keyvaluesFile):
+def load(keyvaluesFile):
     if not isinstance(keyvaluesFile, io.TextIOBase):
         raise ValueError('argument must be like io.TextIOBase')
 
